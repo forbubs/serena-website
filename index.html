@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For Bubs 💕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A simple page for Serena from Faiz." />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #ffe6f7, #e3f2ff);
+      --primary: #ff7aa2;
+      --primary-dark: #f25a8c;
+      --accent: #7c8cff;
+      --text-main: #333;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.08);
+      --radius-lg: 22px;
+      --transition-fast: 0.25s ease;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    section {
+        margin: 40px 0 0; /* was 40px — now more spacious */
+    }
+
+    
+    body {
+      font-family: "Poppins", sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      width: 22px;
+      height: 22px;
+      background: rgba(255, 122, 162, 0.35);
+      transform: rotate(-45deg);
+      border-radius: 50% 50% 0 50%;
+      animation: floatUp 20s linear infinite;
+      z-index: -1;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .heart::before { top: -11px; left: 0; }
+    .heart::after { left: 11px; top: 0; }
+
+    @keyframes floatUp {
+      from { transform: translateY(100vh) rotate(-45deg); opacity: 0; }
+      10% { opacity: 0.9; }
+      to { transform: translateY(-20vh) rotate(-45deg); opacity: 0; }
+    }
+
+    header {
+      padding: 18px 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.8);
+      z-index: 10;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary-dark);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 18px;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #555;
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: var(--transition-fast);
+    }
+
+    nav a:hover {
+      background: rgba(255, 122, 162, 0.15);
+      color: var(--primary-dark);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 18px 60px;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0,1.3fr) minmax(0,1fr);
+      gap: 32px;
+      padding: 40px 0 50px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      box-shadow: var(--shadow-soft);
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.3rem,5vw,3.1rem);
+      margin-bottom: 12px;
+      color: #222;
+    }
+
+    .hero-text h1 span { color: var(--primary-dark); }
+
+    .hero-actions {
+      margin-top: 22px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      border: none;
+      padding: 10px 22px;
+      border-radius: 999px;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .btn-primary:hover { background: var(--primary-dark); }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(242,90,140,0.3);
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      color: var(--primary-dark);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.9);
+      border-color: var(--primary-dark);
+    }
+
+    .hero-card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-card h2 { margin-bottom: 10px; font-size: 1rem; }
+    .hero-card p { margin-bottom: 10px; font-size: 0.9rem; color: #555; }
+
+    .section-header { text-align: center; margin-bottom: 22px; }
+    .section-header h3 { font-size: 1.5rem; margin-bottom: 6px; }
+
+    .timeline { max-width: 750px; margin: 0 auto; display: grid; gap: 16px; }
+    .timeline-item {
+      background: var(--card-bg);
+      padding: 14px 16px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+    }
+    .timeline-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--primary);
+      margin-top: 6px;
+    }
+
+    .photo-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+    .photo-card img {
+      width: 100%; height: 190px; object-fit: cover;
+    }
+    .photo-caption {
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      color: #555;
+    }
+
+    .gallery-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.3fr) minmax(0,1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    /* Video container */
+    .video-wrapper {
+      background: var(--card-bg);
+      padding: 10px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      justify-content: center;
+    }
+
+/* Limit video size */
+    .video-wrapper video {
+      width: 100%;
+      max-width: 420px;   /* <--- CHANGE THIS TO MAKE IT BIGGER/SMALLER */
+      aspect-ratio: 16/9; /* <--- Keeps it tall like a phone video */
+      border-radius: 16px;
+      display: block;
+      object-fit: cover;
+    }
+
+
+    .notes-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    }
+
+    .reason-card {
+      background: var(--card-bg);
+      padding: 14px;
+      border-left: 4px solid rgba(255,122,162,0.7);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* New interactive section styles */
+    .interactive-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 4px;
+    }
+
+    .interactive-main {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 140px;
+    }
+
+    .interactive-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #999;
+    }
+
+    .interactive-text {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .interactive-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-content: flex-start;
+    }
+
+    .tag-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(242,90,140,0.35);
+      background: #fff;
+      padding: 7px 14px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: #555;
+      transition: var(--transition-fast);
+    }
+
+    .tag-btn:hover {
+      border-color: var(--primary-dark);
+      color: var(--primary-dark);
+    }
+
+    .tag-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary-dark);
+      box-shadow: 0 12px 24px rgba(242,90,140,0.35);
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; }
+      .video-grid { grid-template-columns: 1fr; }
+      .interactive-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Floating hearts -->
+  <div class="heart" style="left:10%;animation-delay:0s;"></div>
+  <div class="heart" style="left:30%;animation-delay:4s;"></div>
+  <div class="heart" style="left:55%;animation-delay:8s;"></div>
+  <div class="heart" style="left:80%;animation-delay:2s;"></div>
+
+  <header>
+    <div class="logo">♥ For Bubby</div>
+    <nav>
+      <ul>
+        <li><a href="#story">Story</a></li>
+        <li><a href="#gallery">Photos</a></li>
+        <li><a href="#videos">Videos</a></li>
+        <li><a href="#notes">Notes</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-text">
+        <div class="hero-badge">💫 A page of appreciation just for you.</div>
+        <h1>Hello <span>Serena</span></h1>
+        <p>
+          We have been together for 6 years and 5 months now.  
+          This page is a small representation of the love I have for you.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'});">View Photos →</button>
+          <button class="btn-ghost" onclick="document.getElementById('notes').scrollIntoView({behavior:'smooth'});">Notes 💗</button>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <h2>From Faiz, to his bubs</h2>
+        <p>I love your voice, your eyes, the way you rub your nose, and all of your weird habits.</p>
+        <p>I appreciate your empathy and resilience. You're going to be an amazing wife and mother one day.</p>
+      </aside>
+    </section>
+
+    <section id="story">
+      <div class="section-header">
+        <h3>Our Story</h3>
+        <p>A Timeline of our love.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div>
+            <h4>Start</h4>
+            <p>Stealing your "device" and luring you downstairs is the only crime I’ll proudly admit to.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div>
+            <h4>Highschool</h4>
+            <p>This was a rocky time... But you dealt with all my BS, and I love you all the more for it.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div>
+            <h4>College</h4>
+            <p>This is when I knew you'd be the mother to my kids, I can't fathom a different reality.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div>
+            <h4>Today</h4>
+            <p>My love for you grows with every second, so much so that I am smiling as I write this.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="section-header">
+        <h3>Photos</h3>
+        <p>Just a few of my favorite moments of us</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="photo-card">
+          <img src="images/Gift.jpg" />
+          <div class="photo-caption">The best gift I could ever ask for</div>
+        </div>
+
+        <div class="photo-card">
+          <img src="images/Light.jpg" />
+          <div class="photo-caption">My beautiful, shining light</div>
+        </div>
+
+        <div class="photo-card">
+          <img src="images/Reg1.jpg" />
+          <div class="photo-caption">Idk I just like this photo</div>
+        </div>
+        
+        <div class="photo-card">
+          <img src="images/Prom1.jpeg" />
+          <div class="photo-caption">CaN wE gO tO tHe CaR</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="videos">
+  <div class="section-header">
+    <h3>Montage</h3>
+    <p>Some of our many memories</p>
+  </div>
+
+  <div class="video-grid">
+    <div class="video-wrapper">
+      <video controls>
+        <source src="videos/Vid1.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p>I know you made this video, but it is my favorite—Nothing I make could come close.</p>
+  </div>
+</section>
+
+
+
+    <section id="Notes">
+      <div class="section-header">
+        <h3>Little things I don’t always say out loud</h3>
+        <p>Tap one of the words below and I’ll fill in the rest.</p>
+      </div>
+
+      <div class="interactive-grid">
+        <div class="interactive-main">
+          <div class="interactive-label">Note</div>
+          <div class="interactive-text" id="noteText">
+            What you waiting for bubster? I know you are slow with directions, so I'll repeat them here. Tap one of the word buttons to recieve a message!
+          </div>
+        </div>
+
+        <div class="interactive-tags">
+
+          <button class="tag-btn" type="button"
+            data-note="There isn't a women on this Earth more beautiful or kind than you. I can't envision life without you; I love you more than life itself. Please, never change bubby.">
+            Serena
+          </button>
+
+          <button class="tag-btn" type="button"
+            data-note="You keep the Alpha contained in me, without you, I would lose control (RAHHHHH!!!)">
+            Faiz
+          </button>
+
+          <button class="tag-btn" type="button"
+            data-note="Roses are red my love, Violets are blue! Sugar is sweet my love, But not as sweet as you!">
+            Song Roulette
+          </button>
+
+          <button class="tag-btn" type="button"
+            data-note="Did you pray today? Did you pray today? I could d*** you down on some gangster s***! ">
+            Song Roulette
+          </button>
+
+          <button class="tag-btn" type="button"
+            data-note="If we go some place to dance, I know that there's a chance you won't be leaving with me. Then afterwards we drop into a quiet little place and have a drink or two. And then I go and spoil it all by saying somethin' stupid like, I love you!">
+            Song Roulette
+          </button>
+
+          <button class="tag-btn" type="button"
+            data-note="Stink, Stinky, Guppy, Bubbly, Gutty, Butters, Bubster-Mac-Hold-the-Butt-Cheese, and of course, Bubs💗.">
+            Nicknames
+          </button>
+
+          <button class="tag-btn" type="button"
+            data-note="In the past 6 years, you’ve never done me wrong — aside from the Jesus incident and that time you cried at the top of the club — yet every memory with you is still a good one!">
+            Past
+          </button>
+
+          <button class="tag-btn" type="button"
+            data-note="I seriously can't wait to get old with you. Getting married, having kids (yes... I'll change your diapers for you IG), and everything else that comes with it!">
+            Future
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Made with Pyar by Faiz
+  </footer>
+
+  <script>
+    // Interactive note toggles
+    (function () {
+      const noteText = document.getElementById("noteText");
+      const buttons = document.querySelectorAll(".tag-btn");
+
+      if (!noteText || !buttons.length) return;
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          buttons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          const note = btn.getAttribute("data-note") || "";
+          noteText.textContent = note;
+        });
+      });
+    })();
+
+    console.log("Update the page often. Future you will be glad you did.");
+  </script>
+</body>
+</html>
